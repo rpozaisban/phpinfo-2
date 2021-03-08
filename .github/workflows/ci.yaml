@@ -16,5 +16,5 @@ jobs:
         while true
           do \
             sleep 10 
-            docker exec testcontainer ps | grep 'php -f index.php' && break
+            docker exec testcontainer ps | grep 'php -f index.php' & break
           done
