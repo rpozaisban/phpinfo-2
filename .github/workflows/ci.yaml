@@ -1,29 +1,26 @@
 name: CI
 on: 
   push:
-    branches:
+    branches: 
     - docker
-jobs:
+jobs: 
   docker:
     runs-on: ubuntu-18.04
     steps:
     - name: checkout
       uses: actions/checkout@v2
     - name: test
-      run: 
-        set  -x
+      run: |
+        set -x
         docker build -t test .
-        docker run -d -name testcontainer test
-        while true
+        docker run -d --name testcontainer test
+        while true 
           do \
-            sleep 10 
-            docker exec testcontainer ps | grep 'php -f index.php' & break
+            sleep 10
+            docker exec testcontainer ps | grep 'php -f index.php' && break
           done
         while true
           do \
             sleep 10
-            docker logs testcontainer 2>&1 | grep 'php .* Development Server started' & break
-          done
-
-
-
+            docker logs testcontainer 2>& 1 | grep 'PHP .* Development Server .* started' && break 
+          done    
