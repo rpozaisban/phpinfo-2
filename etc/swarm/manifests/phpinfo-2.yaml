@@ -24,7 +24,7 @@ services:
       start_period: 30s
       test: wget -q --spider http://localhost:8080
       timeout: 1s
-    image: jftavira/phpinfo-2:latest
+    image: rpozaisban/phpinfo-2:latest
     networks: 
     - phpinfo-2
     ports:
