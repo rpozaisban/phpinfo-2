@@ -7,7 +7,7 @@ services:
       mode: replicated
       placement: 
         constraints: 
-        - node.role == worker
+        - node.role == manager
       replicas: 2
       resources:
         limits:
