@@ -1,34 +1,32 @@
-networks: 
-  phpinfo-2: 
-    internal: true
-services:
+networks:
   phpinfo-2:
-    deploy:
-      #varios contenedores en la misma VM
+    internal: true
+services: 
+  phpinfo-2:
+    deploy: 
       mode: replicated
-      #un unico contenedor x cada VM
-      #mode: global
       placement: 
-        constraints:
+        constraints: 
         - node.role == worker
       replicas: 2
-      resources: 
+      resources:
         limits:
           cpus: "0.1"
-          memory: 100m
+          memory: 100M
         reservations:
           cpus: "0.1"
-          memory: 100m
-    expose: 
+          memory: 100M
+    expose:
     - 8080
     healthcheck:
       interval: 10s
       retries: 3
       start_period: 30s
+      test: wget -q --spider http://localhost:8080
       timeout: 1s
-    image: terferre/phpinfo-2:latest 
-    networks:
+    image: jftavira/phpinfo-2:latest
+    networks: 
     - phpinfo-2
-    ports: 
+    ports:
     - 8080:8080
-version: "3.8" 
+version: "3.8"    
